@@ -4,6 +4,7 @@
 html,
 body {
   height: 100vh;
+  background: $background;
 }
 body {
   font-family: $font-main;
@@ -31,6 +32,13 @@ h2 {
     font-size: 1.5em;
     font-weight: 400;
     text-align: center;
+  }
+  .contact & {
+    margin: 40px 0 0;
+    @media screen and (max-width: 900px) {
+      margin: 0 0 0 9px;
+      font-size: 2.5em;
+    }
   }
   .main-highlight & {
     margin: 20px 0 20px 20px;
@@ -100,8 +108,15 @@ strong {
   text-align: center;
   margin: 20px 0;
   background-color: lighten($font-accent, 10%);
+  border: 2px solid #fddacf;
   padding: 10px 15px;
   border-radius: 2px;
+  transition: all 0.1s $cubic;
+  transition-delay: 0s;
+  outline: none;
+  &:hover::after {
+    transform: translate(5px, 5px);
+  }
   &:after {
     content: "";
     position: absolute;
@@ -115,6 +130,9 @@ strong {
     background-color: rgba(0, 0, 0, 0);
     padding: 17px 15px;
     border-radius: 2px;
+    transition: all 0.3s $cubic;
+    transition-delay: 0s;
+
     @media screen and (max-width: 900px) {
       left: 13px;
     }
@@ -169,11 +187,16 @@ strong {
   }
 }
 header {
-  height: 100vh;
   width: 100%;
-  background-image: url("../../img/bg.jpg");
-  background-size: cover;
-  background-attachment: fixed;
+  &.index {
+    height: 100vh;
+    background-image: url("../../img/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  &.contact {
+    background-color: $background;
+  }
   @media screen and (max-width: 900px) {
     background-attachment: scroll;
   }
@@ -253,6 +276,7 @@ header {
       transition-delay: 0s;
       z-index: 4;
       .square {
+        z-index: -1;
         width: 45%;
         height: 35%;
         position: absolute;
@@ -456,6 +480,157 @@ header {
     width: 100%;
   }
 }
+.contact-form {
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
+  .contact-img {
+    width: 50%;
+    background-image: url("../../img/seamless.png");
+    background-size: contain;
+    z-index: 2;
+    @media screen and (max-width: 900px) {
+      background-size: cover;
+      width: 100%;
+      height: 100px;
+    }
+    &.contact-img:after {
+      content: "";
+      display: block;
+      background: linear-gradient(90deg, rgba(248, 244, 243, 0) 0%, rgba(248, 244, 243, 1) 90%, rgb(248, 244, 243) 100%);
+      z-index: -1;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      @media screen and (max-width: 900px) {
+        background: linear-gradient(180deg, rgba(248, 244, 243, 0) 0%, rgba(248, 244, 243, 1) 95%, rgb(248, 244, 243) 100%);
+      }
+    }
+  }
+  p {
+    margin: 0 9px 10px;
+    @media screen and (max-width: 900px) {
+      font-size: 0.8em;
+      margin: 5px 10px 10px;
+    }
+  }
+  form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    padding: 50px 0;
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+    }
+    .btn {
+      align-self: flex-end;
+      @media screen and (max-width: 900px) {
+        margin-right: 10px;
+      }
+    }
+    .group-inputs {
+      margin: 40px 9px;
+      display: flex;
+      justify-content: space-between;
+      @media screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+    }
+    .group {
+      position: relative;
+      width: 40%;
+      margin-bottom: 45px;
+      label {
+        top: 10px;
+      }
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+    }
+    .group-text {
+      margin: 40px 9px;
+      position: relative;
+      label {
+        top: -30px;
+      }
+    }
+    input,
+    textarea {
+      background: transparent;
+      width: 100%;
+      font-size: 1em;
+      padding: 10px 10px 10px 0;
+      display: block;
+      left: 0;
+      border: none;
+      border-bottom: 2px solid lighten($font-accent, 10%);
+
+      &:focus {
+        outline: none;
+      }
+    }
+    textarea {
+      resize: none;
+    }
+    label {
+      @include title-style($font-size: 1.2em);
+      position: absolute;
+      pointer-events: none;
+
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+      @media screen and (max-width: 900px) {
+        font-size: 1em;
+      }
+    }
+
+    /* active state */
+    input:focus ~ label,
+    input:valid ~ label {
+      top: -20px;
+      font-size: 14px;
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+    .bar:before,
+    .bar:after {
+      content: "";
+      height: 2px;
+      width: 0;
+      bottom: 1px;
+      position: absolute;
+      background: lighten($font-accent, 10%);
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+    .bar:before {
+      left: 0;
+    }
+    .bar:after {
+      right: 0;
+    }
+
+    /* active state */
+    input:focus ~ .bar:before,
+    input:focus ~ .bar:after,
+    textarea:focus ~ .bar:before,
+    textarea:focus ~ .bar:after {
+      width: 50%;
+    }
+  }
+}
 footer {
   width: 100%;
   background-color: darken($background, 5%);
@@ -467,6 +642,7 @@ footer {
     @media screen and (max-width: 900px) {
       flex-wrap: wrap;
       padding: 20px 0;
+      font-size: 12px;
     }
   }
   span {
@@ -476,21 +652,27 @@ footer {
   .contact li,
   .social-footer span {
     margin-bottom: 15px;
+    @media screen and (max-width: 900px) {
+      margin-bottom: 8px;
+    }
   }
   .social-footer {
     ul {
+      width: 150px;
       display: flex;
       justify-content: space-between;
       @media screen and (max-width: 900px) {
-        width: 100px;
         margin: 0 auto;
       }
     }
   }
   #top {
     margin-top: 5px;
+    transition: all 0.4s $cubic;
+    transition-delay: 0s;
     &:hover {
       cursor: pointer;
+      transform: translateY(-10px);
     }
   }
 
