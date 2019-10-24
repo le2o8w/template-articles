@@ -114,6 +114,9 @@ strong {
   transition: all 0.1s $cubic;
   transition-delay: 0s;
   outline: none;
+  &:hover {
+    cursor: pointer;
+  }
   &:hover::after {
     transform: translate(5px, 5px);
   }
@@ -667,7 +670,7 @@ footer {
     }
   }
   #top {
-    margin-top: 5px;
+    padding: 10px;
     transition: all 0.4s $cubic;
     transition-delay: 0s;
     &:hover {

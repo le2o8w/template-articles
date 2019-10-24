@@ -159,6 +159,10 @@ strong {
   outline: none;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .btn:hover::after {
   -webkit-transform: translate(5px, 5px);
           transform: translate(5px, 5px);
@@ -991,7 +995,7 @@ footer .social-footer ul {
 }
 
 footer #top {
-  margin-top: 5px;
+  padding: 10px;
   -webkit-transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
   transition: all 0.4s cubic-bezier(0.4, 0.01, 0.165, 0.99);
   -webkit-transition-delay: 0s;
